@@ -12,15 +12,21 @@ export const SOCIAL_LINKS = {
 };
 
 export const SKILLS = [
+  "Digital Marketing & Communication",
+  "E-commerce",
+  "Google Ads",
+  "Google Analytics",
+  "HubSpot",
+  "Project Management",
+  "SEO Optimization",
   "Visual Communication",
   "UX/UI Design",
   "Digital Media Design",
   "Branding & Identity",
   "Adobe Creative Suite",
   "Figma & Canva",
-  "SEO Optimization",
   "CRM",
-  "HTML/CSS Basics",
+  "HTML/CSS Notions",
   "Content Strategy",
   "Social Media Management"
 ];
@@ -139,8 +145,8 @@ export const EDUCATION: Education[] = [
 export const EXPERIENCES: Experience[] = [
   {
     id: "delices-orientales",
-    company: "Les Délices Orientales de Jamile",
-    role: "Social Media & E-commerce Content Manager",
+    company: "Les Délices Orientales de Jamil",
+    role: "Digital Marketing & E-commerce",
     date: "Jul 2025 – Mar 2026",
     description: [
       "Scaled digital presence to 14.9K Instagram followers by leading end-to-end transformation and professional social media account management.",

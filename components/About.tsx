@@ -20,7 +20,7 @@ interface CapstoneData {
 }
 
 const About: React.FC = () => {
-  const [showCertificate, setShowCertificate] = useState(false);
+  const [activeCertificate, setActiveCertificate] = useState<'branding' | 'google_ads' | 'hubspot' | 'google_analytics' | null>(null);
   const [selectedCapstone, setSelectedCapstone] = useState<CapstoneData | null>(null);
 
   const getYoutubeEmbedUrl = (url: string) => {
@@ -51,18 +51,57 @@ const About: React.FC = () => {
                 My academic journey at <strong>Al Akhawayn University</strong> and practical experience in diverse industries have equipped me with a unique blend of creative and analytical skills.
               </p>
               
-              <div className="pt-6">
-                <button 
-                  onClick={() => setShowCertificate(true)}
-                  className="inline-flex items-center gap-3 px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors rounded-sm cursor-pointer text-left w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-brand-yellow/50"
-                  aria-label="View Certificate"
-                >
-                  <Award className="text-brand-yellow" size={20} />
-                  <div>
-                    <p className="font-medium text-black text-sm group-hover:underline">Certificate in Branding & UX Design</p>
-                    <p className="text-xs text-gray-400">Dec 2019 - Jan 2020</p>
-                  </div>
-                </button>
+              <div className="pt-6 space-y-4">
+                <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400">Certifications</h4>
+                <div className="flex flex-col gap-4">
+                  <button 
+                    onClick={() => setActiveCertificate('branding')}
+                    className="flex items-center gap-3 p-4 bg-gray-50 hover:bg-gray-100 border border-gray-100 hover:border-brand-yellow/30 transition-all rounded-sm cursor-pointer text-left w-full focus:outline-none focus:ring-2 focus:ring-brand-yellow/50 group"
+                    aria-label="View Branding & UX Design Certificate"
+                  >
+                    <Award className="text-brand-yellow shrink-0 group-hover:scale-110 transition-transform duration-300" size={22} />
+                    <div>
+                      <p className="font-medium text-black text-sm group-hover:underline transition-colors leading-tight">Branding & UX Design</p>
+                      <p className="text-xs text-gray-400 mt-1">Jan 2020</p>
+                    </div>
+                  </button>
+
+                  <button 
+                    onClick={() => setActiveCertificate('google_ads')}
+                    className="flex items-center gap-3 p-4 bg-gray-50 hover:bg-gray-100 border border-gray-100 hover:border-brand-yellow/30 transition-all rounded-sm cursor-pointer text-left w-full focus:outline-none focus:ring-2 focus:ring-brand-yellow/50 group"
+                    aria-label="View Google Ads Measurement Certification"
+                  >
+                    <Award className="text-brand-yellow shrink-0 group-hover:scale-110 transition-transform duration-300" size={22} />
+                    <div>
+                      <p className="font-medium text-black text-sm group-hover:underline transition-colors leading-tight">Google Ads Measurement</p>
+                      <p className="text-xs text-gray-400 mt-1">Certified Google Ads Expert</p>
+                    </div>
+                  </button>
+
+                  <button 
+                    onClick={() => setActiveCertificate('hubspot')}
+                    className="flex items-center gap-3 p-4 bg-gray-50 hover:bg-gray-100 border border-gray-100 hover:border-brand-yellow/30 transition-all rounded-sm cursor-pointer text-left w-full focus:outline-none focus:ring-2 focus:ring-brand-yellow/50 group"
+                    aria-label="View HubSpot Marketing Hub Software Certification"
+                  >
+                    <Award className="text-brand-yellow shrink-0 group-hover:scale-110 transition-transform duration-300" size={22} />
+                    <div>
+                      <p className="font-medium text-black text-sm group-hover:underline transition-colors leading-tight">HubSpot Marketing Hub</p>
+                      <p className="text-xs text-gray-400 mt-1">Certified Software Expert</p>
+                    </div>
+                  </button>
+
+                  <button 
+                    onClick={() => setActiveCertificate('google_analytics')}
+                    className="flex items-center gap-3 p-4 bg-gray-50 hover:bg-gray-100 border border-gray-100 hover:border-brand-yellow/30 transition-all rounded-sm cursor-pointer text-left w-full focus:outline-none focus:ring-2 focus:ring-brand-yellow/50 group"
+                    aria-label="View Google Analytics Certification"
+                  >
+                    <Award className="text-brand-yellow shrink-0 group-hover:scale-110 transition-transform duration-300" size={22} />
+                    <div>
+                      <p className="font-medium text-black text-sm group-hover:underline transition-colors leading-tight">Google Analytics</p>
+                      <p className="text-xs text-gray-400 mt-1">Certified Analytics Expert</p>
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -220,16 +259,161 @@ const About: React.FC = () => {
 
       {/* Certificate Modal */}
       <Modal 
-        isOpen={showCertificate} 
-        onClose={() => setShowCertificate(false)}
-        title="Certificate"
+        isOpen={activeCertificate !== null} 
+        onClose={() => setActiveCertificate(null)}
+        title={
+          activeCertificate === 'branding' 
+            ? "Branding & UX Design Certificate" 
+            : activeCertificate === 'google_ads' 
+            ? "Google Ads Measurement Certification" 
+            : activeCertificate === 'hubspot'
+            ? "HubSpot Marketing Hub Software Certification"
+            : "Google Analytics Certification"
+        }
       >
-         <div className="flex justify-center items-center bg-gray-50 p-2 rounded-sm">
-            <img 
-              src="https://i.ibb.co/tprrh4fb/Document-2.jpg" 
-              alt="Certificate in Branding & UX Design" 
-              className="max-w-full max-h-[70vh] w-auto h-auto object-contain shadow-lg"
-            />
+         <div className="flex justify-center items-center bg-gray-50 p-4 sm:p-8 rounded-sm overflow-x-hidden">
+            {activeCertificate === 'branding' ? (
+              <img 
+                src="https://i.ibb.co/tprrh4fb/Document-2.jpg" 
+                alt="Certificate in Branding & UX Design" 
+                className="max-w-full max-h-[70vh] w-auto h-auto object-contain shadow-lg rounded-sm"
+                referrerPolicy="no-referrer"
+              />
+            ) : activeCertificate === 'google_ads' ? (
+              <div className="bg-white p-3 sm:p-5 rounded-sm border border-gray-100 max-w-2xl w-full text-center relative overflow-hidden select-none shadow-md">
+                
+                {/* Embed Image */}
+                <div className="flex justify-center mb-6 bg-gray-50 p-2 sm:p-4 rounded-sm border border-gray-100">
+                  <img 
+                    src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/183350269" 
+                    alt="Google Ads Measurement Certification"
+                    className="max-w-full max-h-[60vh] w-auto h-auto object-contain shadow-sm rounded-sm"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
+                {/* Certificate footer details */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left border-t border-gray-100 pt-5 mt-5">
+                  <div className="space-y-1 font-mono text-[11px] text-gray-400">
+                    <p><span className="font-sans font-semibold text-gray-500">Issuer:</span> Google Professional Academy</p>
+                    <p><span className="font-sans font-semibold text-gray-500">Credential ID:</span> 183350269</p>
+                    <p><span className="font-sans font-semibold text-gray-500">Verified Platform:</span> Accredible</p>
+                  </div>
+                  
+                  {/* Verified Link */}
+                  <div className="flex sm:justify-end items-end">
+                    <a 
+                      href="https://credential.net/183350269" 
+                      target="_blank" 
+                      rel="noreferrer"
+                      referrerPolicy="no-referrer"
+                      className="flex items-center gap-2 border border-gray-100 hover:border-brand-yellow/30 px-4 py-2 rounded bg-gray-50 hover:bg-gray-100 transition-colors w-full sm:w-auto justify-center text-center group"
+                    >
+                      <div className="text-[10px] text-left font-mono text-gray-500">
+                        <span className="block font-bold text-black font-sans uppercase tracking-widest leading-none mb-0.5 group-hover:text-brand-yellow transition-colors">Verify</span>
+                        Accredible Portal
+                      </div>
+                      <ExternalLink size={12} className="text-gray-400 group-hover:text-black transition-colors" />
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            ) : activeCertificate === 'hubspot' ? (
+              <div className="bg-white p-6 sm:p-10 rounded-sm border border-gray-100 max-w-xl w-full text-center relative overflow-hidden select-none shadow-md">
+                
+                {/* HubSpot Badge */}
+                <div className="flex justify-center mb-8">
+                  <a 
+                    href="https://app-eu1.hubspot.com/academy/achievements/rppyf6b4/en/1/kadrif-zineb/hubspot-marketing-hub-software-certified" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="block group cursor-pointer transition-transform duration-300 hover:scale-105"
+                    referrerPolicy="no-referrer"
+                    title="Verify HubSpot Marketing Hub Software Certified"
+                  >
+                    <img 
+                      src="https://hubspot-credentials-na1.s3.amazonaws.com/prod/badges/user/55597afd98454720b4c004dc2d912409.png" 
+                      alt="HubSpot Marketing Hub Software Certified"
+                      className="w-40 h-40 object-contain mx-auto"
+                      referrerPolicy="no-referrer"
+                    />
+                  </a>
+                </div>
+
+                {/* Certificate content */}
+                <p className="text-gray-400 text-xs font-light uppercase tracking-[0.2em] mb-3">This acknowledges that</p>
+                <h3 className="text-2xl sm:text-3xl font-bold text-black tracking-tight mb-4 font-sans">Kadrif Zineb</h3>
+                
+                <p className="text-gray-400 text-xs font-light uppercase tracking-[0.2em] mb-3">has successfully completed and is certified in</p>
+                <h4 className="text-lg sm:text-xl font-bold text-gray-800 tracking-tight mb-8">HubSpot Marketing Hub Software</h4>
+
+                {/* Certificate footer details */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left border-t border-gray-100 pt-6 mt-8">
+                  <div className="space-y-1 font-mono text-[11px] text-gray-400">
+                    <p><span className="font-sans font-semibold text-gray-500">Issuer:</span> HubSpot Academy</p>
+                    <p><span className="font-sans font-semibold text-gray-500">Verification Link:</span> <span className="text-brand-yellow hover:underline break-all">App-eu1.hubspot.com</span></p>
+                  </div>
+                  
+                  {/* Verified Badge / Link button */}
+                  <div className="flex sm:justify-end items-end">
+                    <a 
+                      href="https://app-eu1.hubspot.com/academy/achievements/rppyf6b4/en/1/kadrif-zineb/hubspot-marketing-hub-software-certified"
+                      target="_blank"
+                      rel="noreferrer"
+                      referrerPolicy="no-referrer"
+                      className="flex items-center gap-2 border border-gray-100 hover:border-brand-yellow/30 px-4 py-2 rounded bg-gray-50 hover:bg-gray-100 transition-colors w-full sm:w-auto justify-center text-center group"
+                    >
+                      <div className="text-[10px] text-left font-mono text-gray-500">
+                        <span className="block font-bold text-black font-sans uppercase tracking-widest leading-none mb-0.5 group-hover:text-brand-yellow transition-colors">Verify</span>
+                        HubSpot Academy
+                      </div>
+                      <ExternalLink size={12} className="text-gray-400 group-hover:text-black transition-colors" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white p-3 sm:p-5 rounded-sm border border-gray-100 max-w-2xl w-full text-center relative overflow-hidden select-none shadow-md">
+                
+                {/* Embed Image */}
+                <div className="flex justify-center mb-6 bg-gray-50 p-2 sm:p-4 rounded-sm border border-gray-100">
+                  <img 
+                    src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/183308840" 
+                    alt="Google Analytics Certification"
+                    className="max-w-full max-h-[60vh] w-auto h-auto object-contain shadow-sm rounded-sm"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
+                {/* Certificate footer details */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left border-t border-gray-100 pt-5 mt-5">
+                  <div className="space-y-1 font-mono text-[11px] text-gray-400">
+                    <p><span className="font-sans font-semibold text-gray-500">Issuer:</span> Google Professional Academy</p>
+                    <p><span className="font-sans font-semibold text-gray-500">Credential ID:</span> 183308840</p>
+                    <p><span className="font-sans font-semibold text-gray-500">Verified Platform:</span> Accredible</p>
+                  </div>
+                  
+                  {/* Verified Link */}
+                  <div className="flex sm:justify-end items-end">
+                    <a 
+                      href="https://credential.net/183308840" 
+                      target="_blank" 
+                      rel="noreferrer"
+                      referrerPolicy="no-referrer"
+                      className="flex items-center gap-2 border border-gray-100 hover:border-brand-yellow/30 px-4 py-2 rounded bg-gray-50 hover:bg-gray-100 transition-colors w-full sm:w-auto justify-center text-center group"
+                    >
+                      <div className="text-[10px] text-left font-mono text-gray-500">
+                        <span className="block font-bold text-black font-sans uppercase tracking-widest leading-none mb-0.5 group-hover:text-brand-yellow transition-colors">Verify</span>
+                        Accredible Portal
+                      </div>
+                      <ExternalLink size={12} className="text-gray-400 group-hover:text-black transition-colors" />
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            )}
          </div>
       </Modal>
 
