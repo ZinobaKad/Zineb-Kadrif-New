@@ -93,9 +93,10 @@ const Hero: React.FC = () => {
                     {/* Back Side - Photo */}
                     <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-gray-100 overflow-hidden">
                         <img 
-                            src="https://i.ibb.co/GQX95XqH/DSC-0058-2.jpg" 
+                            src="https://i.ibb.co/bMx0Vmxr/profil-picture.png" 
                             alt="Zineb Kadrif" 
                             className="w-full h-full object-cover object-top grayscale"
+                            referrerPolicy="no-referrer"
                         />
                         {/* Flippable Hint Indicator */}
                         <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-black/70 backdrop-blur-sm text-brand-yellow text-[9px] font-extrabold tracking-[0.15em] uppercase py-1.5 px-3 rounded-full shadow-sm z-10 transition-all duration-500">
